@@ -2,7 +2,7 @@
 
 **最終更新**: 2025-10-10
 
-## 📊 進捗率: 67% (6/9画面完了)
+## 📊 進捗率: 78% (7/9画面完了)
 
 ---
 
@@ -51,33 +51,34 @@
   - 残り2日以下の在庫を自動追加
   - チェック/削除機能
 
-### 6. AIレシピ画面 🚧（開始済み）
+### 6. AIレシピ画面 ✅
 - **ファイル**: `src/components/recipe/`
-  - `RecipeScreen.tsx` ✅ 作成済み
-  - `RecipeGenerator.tsx` ❌ 未実装
-  - `RecipeDisplay.tsx` ❌ 未実装
-  - `RecipeHistory.tsx` ❌ 未実装
-  - `FavoriteRecipes.tsx` ❌ 未実装
+  - `RecipeScreen.tsx` - メインコンポーネント
+  - `RecipeGenerator.tsx` - 材料入力・難易度・食事制限・Gemini API呼び出し
+  - `RecipeDisplay.tsx` - レシピ表示・お気に入り・材料連携
+  - `RecipeHistory.tsx` - 直近10件の履歴表示
+  - `FavoriteRecipes.tsx` - お気に入り一覧
+- **機能**:
+  - Gemini 2.0 Flash API連携
+  - 5段階難易度フィルター（超簡単/5分/10分/火なし）
+  - 食事制限対応（ベジタリアン/ヴィーガン）
+  - カスタムリクエスト自由記入
+  - 在庫の材料から直接レシピ生成
+  - レシピ履歴自動保存（最大10件）
+  - お気に入り機能
+  - 材料を在庫・買い物リストに一括追加
 
 ---
 
 ## 🚧 次回実装タスク（優先順位順）
 
-### 1. AIレシピ画面の完成 🔥
-- [ ] `RecipeGenerator.tsx` - 材料入力・難易度・食事制限・Gemini API呼び出し
-- [ ] `RecipeDisplay.tsx` - レシピ表示・お気に入り追加・材料連携
-- [ ] `RecipeHistory.tsx` - 直近10件の履歴表示
-- [ ] `FavoriteRecipes.tsx` - お気に入り一覧
-
-**重要**: 既存の`src/api/gemini.ts`を使用してAPI連携
-
-### 2. バーコードスキャン機能
+### 1. バーコードスキャン機能 🔥
 - [ ] `src/components/barcode/BarcodeScanner.tsx`
 - [ ] ZXing統合（`@zxing/library`）
 - [ ] 商品情報取得（`src/api/rakuten.ts`の4つのAPI）
 - [ ] 食事記録・在庫への追加
 
-### 3. レポート画面
+### 2. レポート画面
 - [ ] `src/components/report/ReportScreen.tsx`
 - [ ] Recharts統合
 - [ ] 週間カロリーグラフ
@@ -85,7 +86,7 @@
 - [ ] 商品ランキング
 - [ ] メーカー別支出
 
-### 4. PWA対応
+### 3. PWA対応
 - [ ] `public/manifest.webmanifest`
 - [ ] Service Worker (`public/sw.js`)
 - [ ] アイコン追加
@@ -106,7 +107,7 @@ src/
 │   ├── settings/ ✅
 │   ├── stock/ ✅
 │   ├── shopping/ ✅
-│   ├── recipe/ 🚧 (RecipeScreen.tsxのみ)
+│   ├── recipe/ ✅
 │   ├── barcode/ ❌
 │   └── report/ ❌
 ├── store/ ✅ (Zustand - 6ストア完成)
@@ -143,11 +144,10 @@ VITE_JANCODE_APP_ID=b72c14dc75bcde18fb7d3628bf7e92b7
 
 ## 🎯 次のセッションの目標
 
-1. **AIレシピ画面を完成させる** (最優先)
-2. バーコードスキャン機能を実装
-3. レポート画面を実装
-4. PWA対応
-5. 全機能の動作確認
+1. **バーコードスキャン機能を実装** (最優先)
+2. レポート画面を実装
+3. PWA対応
+4. 全機能の動作確認
 
 **目標**: 次回セッションで100%完成！🚀
 
