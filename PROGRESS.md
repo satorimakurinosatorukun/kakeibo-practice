@@ -204,6 +204,12 @@ npm run preview
 - **Netlify** - フロントエンド
 - **GitHub Pages** - 静的ホスティング
 
+### 既知の問題
+- [ ] **GitHub Pages デプロイ時に画面が真っ白** (次回修正予定)
+  - 原因: vite.config.tsにbase設定が必要
+  - 修正: `base: '/life-pwa-react/'`を追加
+  - Service Workerのパスも調整必要
+
 ### 今後の改善案
 - [ ] パフォーマンス最適化（コード分割）
 - [ ] アクセシビリティ改善
