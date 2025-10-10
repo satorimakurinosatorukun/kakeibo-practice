@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Header } from './Header';
 import { BottomNav, Screen } from './BottomNav';
 import { Dashboard } from '../dashboard/Dashboard';
+import { MealsScreen } from '../meals/MealsScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -25,12 +26,7 @@ export const Layout: React.FC = () => {
       case 'home':
         return <Dashboard onNavigate={setCurrentScreen} />;
       case 'meals':
-        return (
-          <section className="screen active">
-            <h2>食事記録</h2>
-            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
-          </section>
-        );
+        return <MealsScreen />;
       case 'barcode':
         return (
           <section className="screen active">
