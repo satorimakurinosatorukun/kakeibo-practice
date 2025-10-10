@@ -70,7 +70,7 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
               <div
                 style={{
                   fontSize: '0.75rem',
-                  color: '#999',
+                  color: 'var(--text-secondary, #999)',
                   whiteSpace: 'nowrap',
                   marginLeft: '8px',
                 }}
@@ -81,7 +81,7 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
             <div
               style={{
                 fontSize: '0.85rem',
-                color: '#666',
+                color: 'var(--text-secondary, #666)',
                 display: 'flex',
                 gap: '4px',
                 flexWrap: 'wrap',
@@ -94,7 +94,7 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
                 </span>
               ))}
               {historyItem.recipe.ingredients.length > 3 && (
-                <span style={{ color: '#999' }}>
+                <span style={{ color: 'var(--text-secondary, #999)' }}>
                   他{historyItem.recipe.ingredients.length - 3}個
                 </span>
               )}
