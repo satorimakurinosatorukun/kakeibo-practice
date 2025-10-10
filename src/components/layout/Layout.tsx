@@ -8,6 +8,7 @@ import { Dashboard } from '../dashboard/Dashboard';
 import { MealsScreen } from '../meals/MealsScreen';
 import { SettingsScreen } from '../settings/SettingsScreen';
 import { StockScreen } from '../stock/StockScreen';
+import { ShoppingScreen } from '../shopping/ShoppingScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -51,12 +52,7 @@ export const Layout: React.FC = () => {
       case 'stock':
         return <StockScreen />;
       case 'shopping':
-        return (
-          <section className="screen active">
-            <h2>買い物リスト</h2>
-            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
-          </section>
-        );
+        return <ShoppingScreen />;
       case 'recipe':
         return (
           <section className="screen active">
