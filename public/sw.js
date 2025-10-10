@@ -8,11 +8,11 @@ const CACHE_NAME = `life-pwa-react-${CACHE_VERSION}`;
 
 // キャッシュするリソース
 const STATIC_RESOURCES = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/icon-192.png',
-  '/icon-512.png',
+  '/life-pwa-react/',
+  '/life-pwa-react/index.html',
+  '/life-pwa-react/manifest.webmanifest',
+  '/life-pwa-react/icon-192.png',
+  '/life-pwa-react/icon-512.png',
 ];
 
 // インストール時
@@ -89,7 +89,7 @@ self.addEventListener('fetch', (event) => {
 
           // キャッシュにもない場合は、HTMLリクエストならindex.htmlを返す
           if (event.request.headers.get('accept').includes('text/html')) {
-            return caches.match('/index.html');
+            return caches.match('/life-pwa-react/index.html');
           }
 
           // それ以外はエラーレスポンスを返す
