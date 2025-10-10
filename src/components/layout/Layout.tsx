@@ -7,6 +7,7 @@ import { BottomNav, Screen } from './BottomNav';
 import { Dashboard } from '../dashboard/Dashboard';
 import { MealsScreen } from '../meals/MealsScreen';
 import { SettingsScreen } from '../settings/SettingsScreen';
+import { StockScreen } from '../stock/StockScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -18,6 +19,9 @@ export const Layout: React.FC = () => {
       barcode: 'バーコードスキャン',
       report: 'レポート',
       settings: '設定',
+      stock: '在庫管理',
+      shopping: '買い物リスト',
+      recipe: 'AIレシピ',
     };
     return titles[screen];
   };
@@ -44,6 +48,22 @@ export const Layout: React.FC = () => {
         );
       case 'settings':
         return <SettingsScreen />;
+      case 'stock':
+        return <StockScreen />;
+      case 'shopping':
+        return (
+          <section className="screen active">
+            <h2>買い物リスト</h2>
+            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
+          </section>
+        );
+      case 'recipe':
+        return (
+          <section className="screen active">
+            <h2>AIレシピ</h2>
+            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
+          </section>
+        );
       default:
         return <Dashboard onNavigate={setCurrentScreen} />;
     }

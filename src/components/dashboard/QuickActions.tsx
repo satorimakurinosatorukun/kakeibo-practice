@@ -37,22 +37,22 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ onNavigate }) => {
       onClick: () => alert('家計簿画面（実装予定）'),
     },
     {
+      screen: 'stock' as Screen,
       icon: '📦',
       label: '在庫管理',
       color: '#f59e0b',
-      onClick: () => alert('在庫管理画面（実装予定）'),
     },
     {
+      screen: 'recipe' as Screen,
       icon: '🍳',
       label: 'AIレシピ',
       color: '#ef4444',
-      onClick: () => alert('AIレシピ画面（実装予定）'),
     },
     {
+      screen: 'shopping' as Screen,
       icon: '🛒',
       label: '買い物',
       color: '#06b6d4',
-      onClick: () => alert('買い物リスト画面（実装予定）'),
     },
     {
       screen: 'report',

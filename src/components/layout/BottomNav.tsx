@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-export type Screen = 'home' | 'meals' | 'barcode' | 'report' | 'settings';
+export type Screen = 'home' | 'meals' | 'barcode' | 'report' | 'settings' | 'stock' | 'shopping' | 'recipe';
 
 interface BottomNavProps {
   currentScreen: Screen;
