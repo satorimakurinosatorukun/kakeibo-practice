@@ -6,6 +6,7 @@ import { Header } from './Header';
 import { BottomNav, Screen } from './BottomNav';
 import { Dashboard } from '../dashboard/Dashboard';
 import { MealsScreen } from '../meals/MealsScreen';
+import { SettingsScreen } from '../settings/SettingsScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -42,12 +43,7 @@ export const Layout: React.FC = () => {
           </section>
         );
       case 'settings':
-        return (
-          <section className="screen active">
-            <h2>設定</h2>
-            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
-          </section>
-        );
+        return <SettingsScreen />;
       default:
         return <Dashboard onNavigate={setCurrentScreen} />;
     }
