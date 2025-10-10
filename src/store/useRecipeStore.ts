@@ -2,7 +2,7 @@
  * レシピストア（Zustand）
  */
 import { create } from 'zustand';
-import { Recipe, RecipeHistory } from '../types';
+import type { Recipe, RecipeHistory } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 import { generateUUID } from '../utils/uuid';
 

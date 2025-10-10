@@ -2,7 +2,7 @@
  * 在庫ストア（Zustand）
  */
 import { create } from 'zustand';
-import { Stock, StockFormData } from '../types';
+import type { Stock, StockFormData } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 import { generateUUID } from '../utils/uuid';
 

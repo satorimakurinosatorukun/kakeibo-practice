@@ -2,7 +2,7 @@
  * クイックアクションコンポーネント（3x3グリッド）
  */
 import React from 'react';
-import { Screen } from '../layout/BottomNav';
+import type { Screen } from '../layout/BottomNav';
 
 interface QuickActionsProps {
   onNavigate: (screen: Screen) => void;

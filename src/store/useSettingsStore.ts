@@ -2,7 +2,7 @@
  * 設定ストア（Zustand）
  */
 import { create } from 'zustand';
-import { Settings } from '../types';
+import type { Settings } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 
 interface SettingsStore {

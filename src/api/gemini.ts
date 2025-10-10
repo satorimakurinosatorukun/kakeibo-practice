@@ -5,7 +5,7 @@
  * Gemini 2.0 Flash モデルを使用。
  */
 
-import { RecipeDifficulty, DietaryRestriction } from '../types';
+import type { RecipeDifficulty, DietaryRestriction } from '../types';
 
 // Gemini APIキー（環境変数から取得、または直接設定）
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBSqmtDaNAqF09NTYYKQsTKm-3fLl1LMr0';

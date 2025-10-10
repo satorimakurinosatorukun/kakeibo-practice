@@ -2,7 +2,7 @@
  * 買い物リストストア（Zustand）
  */
 import { create } from 'zustand';
-import { ShoppingItem, ShoppingFormData, ShoppingCategory } from '../types';
+import type { ShoppingItem, ShoppingFormData, ShoppingCategory } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 import { generateUUID } from '../utils/uuid';
 
@@ -33,7 +33,7 @@ const WEEKLY_ESSENTIALS: Array<{ name: string; quantity: number; category: Shopp
   { name: '塩', quantity: 1, category: 'seasoning' },
 ];
 
-export const useShoppingStore = create<ShoppingStore>((set, get) => ({
+export const useShoppingStore = create<ShoppingStore>((set) => ({
   items: getFromStorage<ShoppingItem[]>(STORAGE_KEYS.SHOPPING, []),
 
   addItem: (data) =>

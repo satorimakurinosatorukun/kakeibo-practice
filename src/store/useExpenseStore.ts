@@ -2,7 +2,7 @@
  * 支出ストア（Zustand）
  */
 import { create } from 'zustand';
-import { Expense, ExpenseFormData, ExpenseCategory } from '../types';
+import type { Expense, ExpenseFormData, ExpenseCategory } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 import { generateUUID } from '../utils/uuid';
 

@@ -11,7 +11,7 @@
  * 4. Open Food Facts API - 食品専門
  */
 
-import { ProductInfo, ProductSource } from '../types';
+import type { ProductInfo } from '../types';
 
 // APIキー（環境変数から取得、または直接設定）
 const RAKUTEN_APP_ID = import.meta.env.VITE_RAKUTEN_APP_ID || '';

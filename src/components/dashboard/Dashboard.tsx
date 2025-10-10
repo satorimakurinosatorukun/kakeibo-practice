@@ -4,7 +4,7 @@
 import React from 'react';
 import { SummaryCard } from './SummaryCard';
 import { QuickActions } from './QuickActions';
-import { Screen } from '../layout/BottomNav';
+import type { Screen } from '../layout/BottomNav';
 
 interface DashboardProps {
   onNavigate: (screen: Screen) => void;

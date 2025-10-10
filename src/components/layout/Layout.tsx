@@ -3,12 +3,14 @@
  */
 import React, { useState } from 'react';
 import { Header } from './Header';
-import { BottomNav, Screen } from './BottomNav';
+import { BottomNav } from './BottomNav';
+import type { Screen } from './BottomNav';
 import { Dashboard } from '../dashboard/Dashboard';
 import { MealsScreen } from '../meals/MealsScreen';
 import { SettingsScreen } from '../settings/SettingsScreen';
 import { StockScreen } from '../stock/StockScreen';
 import { ShoppingScreen } from '../shopping/ShoppingScreen';
+import { RecipeScreen } from '../recipe/RecipeScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -54,12 +56,7 @@ export const Layout: React.FC = () => {
       case 'shopping':
         return <ShoppingScreen />;
       case 'recipe':
-        return (
-          <section className="screen active">
-            <h2>AIレシピ</h2>
-            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
-          </section>
-        );
+        return <RecipeScreen />;
       default:
         return <Dashboard onNavigate={setCurrentScreen} />;
     }

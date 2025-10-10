@@ -2,7 +2,7 @@
  * 食事記録ストア（Zustand）
  */
 import { create } from 'zustand';
-import { Intake, IntakeFormData } from '../types';
+import type { Intake, IntakeFormData } from '../types';
 import { getFromStorage, saveToStorage, STORAGE_KEYS } from '../utils/localStorage';
 import { generateUUID } from '../utils/uuid';
 

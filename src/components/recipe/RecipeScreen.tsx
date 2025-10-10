@@ -6,7 +6,7 @@ import { RecipeGenerator } from './RecipeGenerator';
 import { RecipeDisplay } from './RecipeDisplay';
 import { RecipeHistory } from './RecipeHistory';
 import { FavoriteRecipes } from './FavoriteRecipes';
-import { Recipe, RecipeDifficulty, DietaryRestriction } from '../../types';
+import type { Recipe } from '../../types';
 
 export const RecipeScreen: React.FC = () => {
   const [currentRecipe, setCurrentRecipe] = useState<Recipe | null>(null);
