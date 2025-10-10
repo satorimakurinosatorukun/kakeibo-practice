@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-
-// MUIのデフォルトテーマを作成
-const theme = createTheme();
+import './styles/global.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      {/* CssBaselineはブラウザのデフォルトスタイルをリセットし、MUIのスタイルを適用します */}
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>
 );
