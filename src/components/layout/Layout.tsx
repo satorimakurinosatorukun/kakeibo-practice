@@ -11,6 +11,7 @@ import { SettingsScreen } from '../settings/SettingsScreen';
 import { StockScreen } from '../stock/StockScreen';
 import { ShoppingScreen } from '../shopping/ShoppingScreen';
 import { RecipeScreen } from '../recipe/RecipeScreen';
+import { BarcodeScreen } from '../barcode/BarcodeScreen';
 
 export const Layout: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('home');
@@ -36,12 +37,7 @@ export const Layout: React.FC = () => {
       case 'meals':
         return <MealsScreen />;
       case 'barcode':
-        return (
-          <section className="screen active">
-            <h2>バーコードスキャン</h2>
-            <p style={{ padding: '20px', textAlign: 'center' }}>実装中...</p>
-          </section>
-        );
+        return <BarcodeScreen />;
       case 'report':
         return (
           <section className="screen active">
