@@ -6,6 +6,9 @@ import { useStockStore } from '../../store';
 import { generateRecipe } from '../../api/gemini';
 import type { RecipeDifficulty, DietaryRestriction, Recipe } from '../../types';
 import { generateUUID } from '../../utils/uuid';
+import { MdRestaurantMenu, MdInventory, MdAutoAwesome } from 'react-icons/md';
+import { FiSmile, FiZap, FiClock } from 'react-icons/fi';
+import { BsSnow } from 'react-icons/bs';
 
 interface RecipeGeneratorProps {
   onRecipeGenerated: (recipe: Recipe) => void;
@@ -24,18 +27,18 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
   const [dietaryRestriction, setDietaryRestriction] = useState<DietaryRestriction>('none');
   const [customRequest, setCustomRequest] = useState('');
 
-  const difficultyOptions: Array<{ value: RecipeDifficulty; label: string; emoji: string }> = [
-    { value: 'none', label: '指定なし', emoji: '✨' },
-    { value: 'super_easy', label: '超簡単', emoji: '😊' },
-    { value: 'under_5min', label: '5分以内', emoji: '⚡' },
-    { value: 'under_10min', label: '10分以内', emoji: '⏱️' },
-    { value: 'no_fire', label: '火を使わない', emoji: '🧊' },
+  const difficultyOptions: Array<{ value: RecipeDifficulty; label: string; icon: React.ReactNode }> = [
+    { value: 'none', label: '指定なし', icon: <MdAutoAwesome size={16} /> },
+    { value: 'super_easy', label: '超簡単', icon: <FiSmile size={16} /> },
+    { value: 'under_5min', label: '5分以内', icon: <FiZap size={16} /> },
+    { value: 'under_10min', label: '10分以内', icon: <FiClock size={16} /> },
+    { value: 'no_fire', label: '火を使わない', icon: <BsSnow size={16} /> },
   ];
 
-  const dietaryOptions: Array<{ value: DietaryRestriction; label: string; emoji: string }> = [
-    { value: 'none', label: '指定なし', emoji: '🍽️' },
-    { value: 'vegetarian', label: 'ベジタリアン', emoji: '🥗' },
-    { value: 'vegan', label: 'ヴィーガン', emoji: '🌱' },
+  const dietaryOptions: Array<{ value: DietaryRestriction; label: string; icon: React.ReactNode }> = [
+    { value: 'none', label: '指定なし', icon: <MdRestaurantMenu size={16} /> },
+    { value: 'vegetarian', label: 'ベジタリアン', icon: <span>🥗</span> },
+    { value: 'vegan', label: 'ヴィーガン', icon: <span>🌱</span> },
   ];
 
   const handleUseStockIngredients = () => {
@@ -86,7 +89,10 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
 
   return (
     <div className="card">
-      <h3>🍳 レシピを生成</h3>
+      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <MdRestaurantMenu size={20} />
+        レシピを生成
+      </h3>
 
       <label>材料（カンマ区切り）</label>
       <input
@@ -110,7 +116,8 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
         }}
         disabled={isLoading}
       >
-        📦 在庫の材料を使う
+<MdInventory size={18} style={{ marginRight: '6px' }} />
+        在庫の材料を使う
       </button>
 
       <label>難易度</label>
@@ -131,7 +138,7 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
             }}
             disabled={isLoading}
           >
-            {option.emoji} {option.label}
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>{option.icon} {option.label}</span>
           </button>
         ))}
       </div>
@@ -154,7 +161,7 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
             }}
             disabled={isLoading}
           >
-            {option.emoji} {option.label}
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>{option.icon} {option.label}</span>
           </button>
         ))}
       </div>
@@ -180,7 +187,8 @@ export const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({
       />
 
       <button className="submit" onClick={handleGenerate} disabled={isLoading}>
-        ✨ レシピを生成する
+        <MdAutoAwesome size={18} style={{ marginRight: '8px' }} />
+        レシピを生成する
       </button>
     </div>
   );

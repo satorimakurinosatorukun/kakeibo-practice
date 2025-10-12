@@ -20,7 +20,7 @@ const defaultSettings: Settings = {
 };
 
 export const useSettingsStore = create<SettingsStore>((set) => ({
-  settings: getFromStorage(STORAGE_KEYS.SETTINGS, defaultSettings),
+  settings: { ...defaultSettings, ...getFromStorage(STORAGE_KEYS.SETTINGS, defaultSettings) },
 
   updateSettings: (updates) =>
     set((state) => {

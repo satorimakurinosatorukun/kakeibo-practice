@@ -4,6 +4,9 @@
 import React from 'react';
 import type { Recipe } from '../../types';
 import { useRecipeStore } from '../../store';
+import { MdStar, MdChatBubble } from 'react-icons/md';
+import { FiSmile, FiZap, FiClock } from 'react-icons/fi';
+import { BsSnow } from 'react-icons/bs';
 
 interface FavoriteRecipesProps {
   onRecipeSelect: (recipe: Recipe) => void;
@@ -25,7 +28,10 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
 
   return (
     <div className="card">
-      <h3>⭐ お気に入りレシピ</h3>
+      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <MdStar size={20} color="#fbbf24" />
+        お気に入りレシピ
+      </h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
         {favoriteRecipes.map((recipe) => (
           <div
@@ -70,17 +76,18 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
                   fontSize: '20px',
                   cursor: 'pointer',
                   padding: '0 4px',
+                  color: '#fbbf24',
                 }}
                 title="お気に入りから削除"
               >
-                ⭐
+                <MdStar size={24} />
               </button>
             </div>
 
             <div
               style={{
                 fontSize: '0.9rem',
-                color: '#666',
+                color: 'var(--text-secondary, #666)',
                 marginBottom: '8px',
                 display: 'flex',
                 gap: '6px',
@@ -95,7 +102,7 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
                 </span>
               ))}
               {recipe.ingredients.length > 4 && (
-                <span style={{ color: '#999' }}>
+                <span style={{ color: 'var(--text-secondary, #999)' }}>
                   他{recipe.ingredients.length - 4}個
                 </span>
               )}
@@ -121,15 +128,17 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
                       fontWeight: 500,
                     }}
                   >
-                    {
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                       {
-                        super_easy: '😊 超簡単',
-                        under_5min: '⚡ 5分以内',
-                        under_10min: '⏱️ 10分以内',
-                        no_fire: '🧊 火を使わない',
-                        none: '',
-                      }[recipe.difficulty]
-                    }
+                        {
+                          super_easy: <><FiSmile size={14} /> 超簡単</>,
+                          under_5min: <><FiZap size={14} /> 5分以内</>,
+                          under_10min: <><FiClock size={14} /> 10分以内</>,
+                          no_fire: <><BsSnow size={14} /> 火を使わない</>,
+                          none: '',
+                        }[recipe.difficulty]
+                      }
+                    </span>
                   </span>
                 )}
                 {recipe.dietaryRestriction && recipe.dietaryRestriction !== 'none' && (
@@ -160,14 +169,18 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
                 style={{
                   marginTop: '8px',
                   fontSize: '0.85rem',
-                  color: '#666',
+                  color: 'var(--text-secondary, #666)',
                   fontStyle: 'italic',
                   padding: '6px 10px',
                   background: 'var(--background)',
                   borderRadius: '6px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '6px',
                 }}
               >
-                💬 {recipe.customRequest}
+                <MdChatBubble size={14} style={{ marginTop: '2px', flexShrink: 0 }} />
+                {recipe.customRequest}
               </div>
             )}
           </div>

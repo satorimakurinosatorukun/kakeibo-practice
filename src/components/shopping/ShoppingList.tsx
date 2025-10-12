@@ -2,15 +2,44 @@
  * 買い物リスト表示コンポーネント
  */
 import React from 'react';
-import { useShoppingStore } from '../../store';
+import { useShoppingStore, useStockStore } from '../../store';
+import { MdDelete, MdInventory } from 'react-icons/md';
 
 export const ShoppingList: React.FC = () => {
   const { items, toggleItem, deleteItem, clearCompleted } = useShoppingStore();
+  const { addStock } = useStockStore();
 
   const handleClear = () => {
     if (confirm('チェック済みのアイテムをすべて削除しますか？')) {
       clearCompleted();
     }
+  };
+
+  const handleMoveToStock = () => {
+    const checkedItems = items.filter((item) => item.checked);
+    if (checkedItems.length === 0) {
+      alert('チェック済みのアイテムがありません');
+      return;
+    }
+
+    if (
+      !confirm(
+        `チェック済みのアイテム ${checkedItems.length}個を在庫に追加しますか？\n（賞味期限は7日後に設定されます）`
+      )
+    ) {
+      return;
+    }
+
+    checkedItems.forEach((item) => {
+      addStock({
+        name: item.name,
+        quantity: item.quantity,
+        daysRemaining: 7,
+      });
+    });
+
+    clearCompleted();
+    alert(`${checkedItems.length}個のアイテムを在庫に追加しました！`);
   };
 
   return (
@@ -83,19 +112,42 @@ export const ShoppingList: React.FC = () => {
                     fontSize: '18px',
                   }}
                 >
-                  🗑️
+                  <MdDelete size={20} />
                 </button>
               </li>
             ))}
           </ul>
           {items.some((item) => item.checked) && (
-            <button
-              className="submit"
-              onClick={handleClear}
-              style={{ background: '#ef4444', marginTop: '12px' }}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '8px',
+                marginTop: '12px',
+              }}
             >
-              チェック済みをクリア
-            </button>
+              <button
+                className="submit"
+                onClick={handleMoveToStock}
+                style={{
+                  background: '#10b981',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                }}
+              >
+                <MdInventory size={18} />
+                在庫に追加
+              </button>
+              <button
+                className="submit"
+                onClick={handleClear}
+                style={{ background: '#ef4444' }}
+              >
+                クリア
+              </button>
+            </div>
           )}
         </>
       )}

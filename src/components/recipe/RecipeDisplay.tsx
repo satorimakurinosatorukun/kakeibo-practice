@@ -4,6 +4,9 @@
 import React from 'react';
 import type { Recipe } from '../../types';
 import { useRecipeStore, useStockStore, useShoppingStore } from '../../store';
+import { MdStar, MdStarBorder, MdInventory, MdShoppingCart } from 'react-icons/md';
+import { FiSmile, FiZap, FiClock } from 'react-icons/fi';
+import { BsSnow } from 'react-icons/bs';
 
 interface RecipeDisplayProps {
   recipe: Recipe;
@@ -82,10 +85,11 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
             fontSize: '24px',
             cursor: 'pointer',
             padding: '4px',
+            color: isFavorite ? '#fbbf24' : 'var(--text-secondary)',
           }}
           title={isFavorite ? 'お気に入りから削除' : 'お気に入りに追加'}
         >
-          {isFavorite ? '⭐' : '☆'}
+          {isFavorite ? <MdStar size={28} /> : <MdStarBorder size={28} />}
         </button>
       </div>
 
@@ -108,15 +112,17 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
               fontWeight: 500,
             }}
           >
-            {
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               {
-                super_easy: '😊 超簡単',
-                under_5min: '⚡ 5分以内',
-                under_10min: '⏱️ 10分以内',
-                no_fire: '🧊 火を使わない',
-                none: '',
-              }[recipe.difficulty]
-            }
+                {
+                  super_easy: <><FiSmile size={14} /> 超簡単</>,
+                  under_5min: <><FiZap size={14} /> 5分以内</>,
+                  under_10min: <><FiClock size={14} /> 10分以内</>,
+                  no_fire: <><BsSnow size={14} /> 火を使わない</>,
+                  none: '',
+                }[recipe.difficulty]
+              }
+            </span>
           </span>
         )}
         {recipe.dietaryRestriction && recipe.dietaryRestriction !== 'none' && (
@@ -173,9 +179,13 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
             cursor: 'pointer',
             fontWeight: 500,
             fontSize: '0.9rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
           }}
         >
-          📦 在庫に追加
+          <MdInventory size={18} /> 在庫に追加
         </button>
         <button
           onClick={handleAddToShopping}
@@ -188,9 +198,13 @@ export const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
             cursor: 'pointer',
             fontWeight: 500,
             fontSize: '0.9rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
           }}
         >
-          🛒 買い物リストへ
+          <MdShoppingCart size={18} /> 買い物リストへ
         </button>
       </div>
     </div>

@@ -4,6 +4,9 @@
 import React from 'react';
 import type { Recipe } from '../../types';
 import { useRecipeStore } from '../../store';
+import { MdHistory } from 'react-icons/md';
+import { FiSmile, FiZap, FiClock } from 'react-icons/fi';
+import { BsSnow } from 'react-icons/bs';
 
 interface RecipeHistoryProps {
   onRecipeSelect: (recipe: Recipe) => void;
@@ -33,7 +36,10 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
 
   return (
     <div className="card">
-      <h3>📜 レシピ履歴</h3>
+      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <MdHistory size={20} />
+        レシピ履歴
+      </h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {recipeHistory.map((historyItem) => (
           <div
@@ -120,10 +126,10 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
                   >
                     {
                       {
-                        super_easy: '😊',
-                        under_5min: '⚡',
-                        under_10min: '⏱️',
-                        no_fire: '🧊',
+                        super_easy: <FiSmile size={12} />,
+                        under_5min: <FiZap size={12} />,
+                        under_10min: <FiClock size={12} />,
+                        no_fire: <BsSnow size={12} />,
                         none: '',
                       }[historyItem.recipe.difficulty]
                     }

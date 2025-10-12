@@ -4,15 +4,18 @@
 import React, { useState } from 'react';
 import { useIntakeStore, useStockStore } from '../../store';
 import type { ProductInfo } from '../../types';
+import { MdCheckCircle, MdRestaurant, MdInventory } from 'react-icons/md';
 
 interface ProductDisplayProps {
   product: ProductInfo;
   onAdded: () => void;
+  onNavigateToStock?: () => void;
 }
 
 export const ProductDisplay: React.FC<ProductDisplayProps> = ({
   product,
   onAdded,
+  onNavigateToStock,
 }) => {
   const { addIntake } = useIntakeStore();
   const { addStock } = useStockStore();
@@ -54,13 +57,25 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({
       price: price ? Number(price) : undefined,
     });
 
-    alert('在庫管理に追加しました！');
-    onAdded();
+    if (onNavigateToStock) {
+      // 在庫画面に遷移する場合
+      onAdded();
+      setTimeout(() => {
+        onNavigateToStock();
+      }, 100);
+    } else {
+      // 従来通りアラート表示
+      alert('在庫管理に追加しました！');
+      onAdded();
+    }
   };
 
   return (
     <div className="card">
-      <h3>✅ 商品情報を取得しました</h3>
+      <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <MdCheckCircle size={24} color="#10b981" />
+        商品情報を取得しました
+      </h3>
 
       {/* 商品情報 */}
       <div
@@ -133,8 +148,9 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({
 
       {/* 食事記録に追加 */}
       <div style={{ marginBottom: '24px' }}>
-        <h4 style={{ marginBottom: '12px', fontSize: '1rem' }}>
-          🍽️ 食事記録に追加
+        <h4 style={{ marginBottom: '12px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <MdRestaurant size={18} />
+          食事記録に追加
         </h4>
         <label>カロリー (kcal)</label>
         <input
@@ -161,8 +177,9 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({
 
       {/* 在庫管理に追加 */}
       <div>
-        <h4 style={{ marginBottom: '12px', fontSize: '1rem' }}>
-          📦 在庫管理に追加
+        <h4 style={{ marginBottom: '12px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <MdInventory size={18} />
+          在庫管理に追加
         </h4>
         <label>賞味期限までの日数</label>
         <input
@@ -176,7 +193,7 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({
           onClick={handleAddToStock}
           style={{ background: '#10b981' }}
         >
-          在庫管理に追加
+          {onNavigateToStock ? '在庫管理に追加して画面移動' : '在庫管理に追加'}
         </button>
       </div>
 

@@ -3,6 +3,7 @@
  */
 import React, { useMemo } from 'react';
 import { useIntakeStore } from '../../store';
+import { MdDelete } from 'react-icons/md';
 
 export const MealList: React.FC = () => {
   const { intakes, deleteIntake, getTotalCaloriesByDate, getTotalPriceByDate } =
@@ -63,7 +64,7 @@ export const MealList: React.FC = () => {
                     fontSize: '18px',
                   }}
                 >
-                  🗑️
+                  <MdDelete size={20} />
                 </button>
               </li>
             ))}

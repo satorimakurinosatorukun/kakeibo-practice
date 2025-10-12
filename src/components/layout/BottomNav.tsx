@@ -2,6 +2,8 @@
  * ボトムナビゲーションコンポーネント
  */
 import React from 'react';
+import { FiHome, FiCamera, FiBarChart2, FiSettings } from 'react-icons/fi';
+import { MdRestaurant } from 'react-icons/md';
 
 export type Screen = 'home' | 'meals' | 'barcode' | 'report' | 'settings' | 'stock' | 'shopping' | 'recipe';
 
@@ -11,12 +13,12 @@ interface BottomNavProps {
 }
 
 export const BottomNav: React.FC<BottomNavProps> = ({ currentScreen, onNavigate }) => {
-  const navItems: Array<{ screen: Screen; icon: string; label: string }> = [
-    { screen: 'home', icon: '🏠', label: 'ホーム' },
-    { screen: 'meals', icon: '🍽️', label: '食事' },
-    { screen: 'barcode', icon: '📸', label: 'スキャン' },
-    { screen: 'report', icon: '📊', label: 'レポート' },
-    { screen: 'settings', icon: '⚙️', label: '設定' },
+  const navItems: Array<{ screen: Screen; icon: React.ReactNode; label: string }> = [
+    { screen: 'home', icon: <FiHome size={24} />, label: 'ホーム' },
+    { screen: 'meals', icon: <MdRestaurant size={24} />, label: '食事' },
+    { screen: 'barcode', icon: <FiCamera size={24} />, label: 'スキャン' },
+    { screen: 'report', icon: <FiBarChart2 size={24} />, label: 'レポート' },
+    { screen: 'settings', icon: <FiSettings size={24} />, label: '設定' },
   ];
 
   return (
@@ -27,7 +29,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentScreen, onNavigate 
           className={`nav-item ${currentScreen === item.screen ? 'active' : ''}`}
           onClick={() => onNavigate(item.screen)}
         >
-          <span style={{ fontSize: '24px' }}>{item.icon}</span>
+          <span>{item.icon}</span>
           <span>{item.label}</span>
         </button>
       ))}

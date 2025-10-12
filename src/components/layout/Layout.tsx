@@ -38,7 +38,7 @@ export const Layout: React.FC = () => {
       case 'meals':
         return <MealsScreen />;
       case 'barcode':
-        return <BarcodeScreen />;
+        return <BarcodeScreen onNavigateToStock={() => setCurrentScreen('stock')} />;
       case 'report':
         return <ReportScreen />;
       case 'settings':

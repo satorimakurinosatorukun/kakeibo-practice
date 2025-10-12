@@ -2,15 +2,25 @@
  * 在庫一覧表示コンポーネント
  */
 import React from 'react';
-import { useStockStore } from '../../store';
+import { useStockStore, useShoppingStore } from '../../store';
+import { MdDelete, MdShoppingCart } from 'react-icons/md';
 
 export const StockList: React.FC = () => {
   const { stocks, deleteStock } = useStockStore();
+  const { addItem } = useShoppingStore();
 
   const handleDelete = (id: string) => {
     if (confirm('この在庫を削除しますか？')) {
       deleteStock(id);
     }
+  };
+
+  const handleAddToShopping = (stockName: string, stockQuantity: number) => {
+    addItem({
+      name: stockName,
+      quantity: stockQuantity,
+    });
+    alert(`「${stockName}」を買い物リストに追加しました！`);
   };
 
   const getStatusColor = (daysRemaining: number) => {
@@ -65,19 +75,36 @@ export const StockList: React.FC = () => {
                   {getStatusLabel(stock.daysRemaining)}
                 </div>
               </div>
-              <button
-                onClick={() => handleDelete(stock.id)}
-                className="delete-btn"
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#ef4444',
-                  cursor: 'pointer',
-                  fontSize: '18px',
-                }}
-              >
-                🗑️
-              </button>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  onClick={() => handleAddToShopping(stock.name, stock.quantity)}
+                  className="delete-btn"
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#3b82f6',
+                    cursor: 'pointer',
+                    fontSize: '18px',
+                  }}
+                  title="買い物リストに追加"
+                >
+                  <MdShoppingCart size={20} />
+                </button>
+                <button
+                  onClick={() => handleDelete(stock.id)}
+                  className="delete-btn"
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#ef4444',
+                    cursor: 'pointer',
+                    fontSize: '18px',
+                  }}
+                  title="削除"
+                >
+                  <MdDelete size={20} />
+                </button>
+              </div>
             </li>
           ))}
         </ul>
