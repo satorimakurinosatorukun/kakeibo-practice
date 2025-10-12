@@ -93,13 +93,13 @@ export const RecipeHistory: React.FC<RecipeHistoryProps> = ({ onRecipeSelect }) 
                 flexWrap: 'wrap',
               }}
             >
-              {historyItem.recipe.ingredients.slice(0, 3).map((ingredient: string, index: number) => (
+              {historyItem.recipe.ingredients && historyItem.recipe.ingredients.slice(0, 3).map((ingredient: string, index: number) => (
                 <span key={index}>
                   {ingredient}
-                  {index < Math.min(historyItem.recipe.ingredients.length - 1, 2) ? '、' : ''}
+                  {index < Math.min((historyItem.recipe.ingredients?.length || 0) - 1, 2) ? '、' : ''}
                 </span>
               ))}
-              {historyItem.recipe.ingredients.length > 3 && (
+              {historyItem.recipe.ingredients && historyItem.recipe.ingredients.length > 3 && (
                 <span style={{ color: 'var(--text-secondary, #999)' }}>
                   他{historyItem.recipe.ingredients.length - 3}個
                 </span>

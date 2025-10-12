@@ -95,13 +95,13 @@ export const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({ onRecipeSelect
               }}
             >
               <span style={{ fontWeight: 500 }}>材料:</span>
-              {recipe.ingredients.slice(0, 4).map((ingredient, index) => (
+              {recipe.ingredients && recipe.ingredients.slice(0, 4).map((ingredient, index) => (
                 <span key={index}>
                   {ingredient}
-                  {index < Math.min(recipe.ingredients.length - 1, 3) ? '、' : ''}
+                  {index < Math.min((recipe.ingredients?.length || 0) - 1, 3) ? '、' : ''}
                 </span>
               ))}
-              {recipe.ingredients.length > 4 && (
+              {recipe.ingredients && recipe.ingredients.length > 4 && (
                 <span style={{ color: 'var(--text-secondary, #999)' }}>
                   他{recipe.ingredients.length - 4}個
                 </span>
