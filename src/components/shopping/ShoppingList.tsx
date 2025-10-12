@@ -1,13 +1,14 @@
 /**
  * 買い物リスト表示コンポーネント
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { useShoppingStore, useStockStore } from '../../store';
-import { MdDelete, MdInventory } from 'react-icons/md';
+import { MdDelete, MdInventory, MdCheckCircle } from 'react-icons/md';
 
 export const ShoppingList: React.FC = () => {
   const { items, toggleItem, deleteItem, clearCompleted } = useShoppingStore();
   const { addStock } = useStockStore();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleClear = () => {
     if (confirm('チェック済みのアイテムをすべて削除しますか？')) {
@@ -39,7 +40,12 @@ export const ShoppingList: React.FC = () => {
     });
 
     clearCompleted();
-    alert(`${checkedItems.length}個のアイテムを在庫に追加しました！`);
+
+    // 成功メッセージを表示
+    setShowSuccess(true);
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000);
   };
 
   return (
@@ -118,35 +124,107 @@ export const ShoppingList: React.FC = () => {
             ))}
           </ul>
           {items.some((item) => item.checked) && (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '8px',
-                marginTop: '12px',
-              }}
-            >
-              <button
-                className="submit"
-                onClick={handleMoveToStock}
+            <>
+              {/* 目玉機能: 在庫に追加 */}
+              <div
                 style={{
-                  background: '#10b981',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
+                  marginTop: '16px',
+                  padding: '16px',
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
                 }}
               >
-                <MdInventory size={18} />
-                在庫に追加
-              </button>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginBottom: '8px',
+                    color: 'white',
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                  }}
+                >
+                  <MdInventory size={20} />
+                  <span>買い物完了後はこちら！</span>
+                </div>
+                <p
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontSize: '0.85rem',
+                    margin: '0 0 12px 0',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  チェックした商品を在庫に一括追加できます。
+                  <br />
+                  賞味期限は自動で7日後に設定されます。
+                </p>
+                <button
+                  className="submit"
+                  onClick={handleMoveToStock}
+                  style={{
+                    background: 'white',
+                    color: '#10b981',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    padding: '14px',
+                    border: 'none',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                  }}
+                >
+                  <MdInventory size={22} />
+                  在庫に追加（{items.filter((item) => item.checked).length}個）
+                </button>
+              </div>
+
+              {/* クリアボタン */}
               <button
                 className="submit"
                 onClick={handleClear}
-                style={{ background: '#ef4444' }}
+                style={{
+                  background: 'transparent',
+                  color: '#ef4444',
+                  border: '2px solid #ef4444',
+                  marginTop: '8px',
+                  width: '100%',
+                }}
               >
-                クリア
+                チェック済みをクリア
               </button>
+            </>
+          )}
+
+          {/* 成功メッセージ */}
+          {showSuccess && (
+            <div
+              style={{
+                position: 'fixed',
+                top: '80px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: '#10b981',
+                color: 'white',
+                padding: '16px 24px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                zIndex: 1000,
+                animation: 'slideDown 0.3s ease-out',
+                fontSize: '1rem',
+                fontWeight: 600,
+              }}
+            >
+              <MdCheckCircle size={28} />
+              <span>在庫に追加しました！</span>
             </div>
           )}
         </>
