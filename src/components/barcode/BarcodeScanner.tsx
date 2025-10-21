@@ -43,13 +43,31 @@ export const BarcodeScanner: React.FC<BarcodeScannerProps> = ({
         throw new Error('カメラが見つかりません');
       }
 
-      // 背面カメラを優先的に選択
-      const backCamera = videoInputDevices.find((device) =>
-        device.label.toLowerCase().includes('back')
-      );
+      // 外部カメラ（背面カメラ）を強制的に使用
+      // スマホの場合、内蔵カメラ（フロントカメラ）ではなく、
+      // 背面カメラを優先的に選択することでバーコードスキャンの精度を向上
+      const backCamera = videoInputDevices.find((device) => {
+        const label = device.label.toLowerCase();
+        // 複数のキーワードで背面カメラを検出
+        // 'back': 英語の一般的な表記
+        // 'rear': 背面カメラの別表記
+        // 'environment': facingModeの標準値
+        // 'camera 0': 一部のデバイスでの背面カメラの表記
+        return (
+          label.includes('back') ||
+          label.includes('rear') ||
+          label.includes('environment') ||
+          (label.includes('camera') && label.includes('0'))
+        );
+      });
+
+      // 背面カメラが見つかった場合はそれを使用、
+      // 見つからない場合は最後のカメラを使用（多くの場合、最後が背面カメラ）
       const selectedDeviceId = backCamera
         ? backCamera.deviceId
-        : videoInputDevices[0].deviceId;
+        : videoInputDevices[videoInputDevices.length - 1].deviceId;
+
+      console.log('使用するカメラ:', backCamera ? backCamera.label : videoInputDevices[videoInputDevices.length - 1].label);
 
       // スキャン開始
       codeReader.decodeFromVideoDevice(
