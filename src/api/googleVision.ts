@@ -39,6 +39,10 @@ function fileToBase64(_file: File): Promise<string> {
  * Call Google Cloud Vision API for document text detection
  */
 async function callGoogleVisionAPI(imageBase64: string): Promise<any> {
+  if (!API_ENABLED) {
+    throw new Error('Google Cloud Vision API is not configured');
+  }
+
   const endpoint = `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_VISION_API_KEY}`;
 
   const requestBody = {
