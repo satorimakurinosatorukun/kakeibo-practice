@@ -3,9 +3,9 @@
  */
 import React from 'react';
 import { FiHome, FiCamera, FiBarChart2, FiSettings } from 'react-icons/fi';
-import { MdRestaurant } from 'react-icons/md';
+import { MdRestaurant, MdAttachMoney, MdReceipt } from 'react-icons/md';
 
-export type Screen = 'home' | 'meals' | 'barcode' | 'report' | 'settings' | 'stock' | 'shopping' | 'recipe';
+export type Screen = 'home' | 'meals' | 'barcode' | 'report' | 'expense' | 'settings' | 'stock' | 'shopping' | 'recipe' | 'receipt';
 
 interface BottomNavProps {
   currentScreen: Screen;
@@ -17,6 +17,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentScreen, onNavigate 
     { screen: 'home', icon: <FiHome size={24} />, label: 'ホーム' },
     { screen: 'meals', icon: <MdRestaurant size={24} />, label: '食事' },
     { screen: 'barcode', icon: <FiCamera size={24} />, label: 'スキャン' },
+    { screen: 'receipt', icon: <MdReceipt size={24} />, label: 'レシート' },
+    { screen: 'expense', icon: <MdAttachMoney size={24} />, label: '家計簿' },
     { screen: 'report', icon: <FiBarChart2 size={24} />, label: 'レポート' },
     { screen: 'settings', icon: <FiSettings size={24} />, label: '設定' },
   ];

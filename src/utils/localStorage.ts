@@ -57,4 +57,5 @@ export const STORAGE_KEYS = {
   RECIPE_HISTORY: 'recipeHistory',
   FAVORITE_RECIPES: 'favoriteRecipes',
   SETTINGS: 'settings',
+  RECEIPTS: 'receipts',
 } as const;
