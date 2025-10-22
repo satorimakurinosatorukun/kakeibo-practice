@@ -1,26 +1,34 @@
-/**
- * 支出（Expense）の型定義
- */
+// Common types for kakeibo-practice
+
+export type ExpenseCategory = 'food' | 'transport' | 'utilities' | 'entertainment' | 'health' | 'other'
+
 export interface Expense {
-  id: string;
-  category: ExpenseCategory;
-  amount: number;
-  date: string; // ISO 8601形式
-  memo?: string;
-  createdAt: string;
-  updatedAt?: string;
+  id: string
+  category: ExpenseCategory
+  amount: number
+  date: string
+  memo?: string
+  createdAt: string
+  updatedAt?: string
 }
 
-export type ExpenseCategory =
-  | 'food' // 食費
-  | 'transport' // 交通費
-  | 'utilities' // 光熱費
-  | 'entertainment' // 娯楽
-  | 'health' // 医療
-  | 'other'; // その他
-
 export interface ExpenseFormData {
-  category: ExpenseCategory;
-  amount: number;
-  memo?: string;
+  category: ExpenseCategory
+  amount: number
+  memo?: string
+}
+
+export interface ExpenseSummary {
+  totalByMonth: number
+  totalByCategory: Record<ExpenseCategory, number>
+  lastUpdated: string
+}
+
+export const EXPENSE_CATEGORIES: Record<ExpenseCategory, { label: string; description: string }> = {
+  food: { label: '食費', description: '食事・食材' },
+  transport: { label: '交通費', description: '電車・バス・ガソリン' },
+  utilities: { label: '光熱費', description: '電気・ガス・水道' },
+  entertainment: { label: '娯楽', description: 'エンタメ・趣味' },
+  health: { label: '医療', description: '病院・薬' },
+  other: { label: 'その他', description: 'その他の支出' },
 }
