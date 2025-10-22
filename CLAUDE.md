@@ -1,6 +1,6 @@
 # Claude Code 開発メモ - 健康家計アプリ (React版)
 
-**最終更新: 2025-10-22 (Google Cloud Vision APIを使用したレシート読み取り機能完成！)**
+**最終更新: 2025-10-22 (Google Cloud Vision APIを使用したレシート読み取り機能 + GitHub Pages白画面修正！)**
 
 ## 📋 プロジェクト概要
 
@@ -23,6 +23,43 @@ Vanilla JSで開発した「健康家計アプリ」をReact + TypeScriptに移�
 3. ✅ **AI健康アドバイザー** - 買い物リストの健康チェック
 4. ✅ **GitHub Pagesデプロイ問題** - すべて解決
 5. ✅ **Google Cloud Vision APIレシート読み取り機能** - 実装完了！
+
+### 🔧 GitHub Pages 白画面修正（セッション4 追加対応）
+
+**問題:**
+- GitHub Pages で画面が白いまま表示されない
+- コンソールに 404 エラー: `icon-192.png`, `manifest.webmanifest` が見つからない
+
+**原因:**
+- `index.html` のマニフェスト・アイコンパスが `/manifest.webmanifest` (絶対パス)
+- GitHub Pages のサブディレクトリ配下では正しくロードされない
+
+**修正内容:**
+1. **`index.html` のパス修正**
+   - `/manifest.webmanifest` → `/life-pwa-react/manifest.webmanifest`
+   - `/icon-192.png` → `/life-pwa-react/icon-192.png`
+
+2. **Google Vision API エラーハンドリング強化**
+   - API キー未設定時の早期チェック
+   - より明確なエラーメッセージ
+
+3. **デバッグガイド作成**
+   - `DEBUG.md` - GitHub Pages デバッグ方法を詳細に記載
+   - コンソールでのデバッグコマンド例
+   - 404 エラーの対処方法
+
+**デプロイ:**
+```
+commit bc435bc: Fix asset and manifest paths for GitHub Pages deployment
+commit 023439b: Improve Google Vision API error handling
+```
+
+**結果:**
+- ✅ アセットパス問題を解決
+- ✅ 404 エラー回避
+- ✅ デバッグ手順を文書化
+
+---
 
 ### ✅ Google Cloud Vision API レシート読み取り機能（セッション4）
 
